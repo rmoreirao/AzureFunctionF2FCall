@@ -1,9 +1,9 @@
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 
-[assembly: FunctionsStartup(typeof(TestOuter.Function.Startup))]
+[assembly: FunctionsStartup(typeof(TestInner.Function.Startup))]
 
-namespace TestOuter.Function
+namespace TestInner.Function
 {
     public class Startup : FunctionsStartup
     {

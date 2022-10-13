@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 using Azure.Storage.Blobs;
 using System.Text;
 
-namespace TestASR.Function
+namespace TestInner.Function
 {
     public static class HttpTriggerInnerFunction
     {
