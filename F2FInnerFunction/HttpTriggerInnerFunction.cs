@@ -26,7 +26,7 @@ namespace TestASR.Function
             
             sbLog.Append("inner;" + guid + ";"  + startTime.ToString("MM-dd-yyyTHH:mm:ss.fff") + ";");
 
-            // var serviceClient = new BlobServiceClient("DefaultEndpointsProtocol=https;AccountName=storagetestasrblob;AccountKey=idnWk9PRy9xoNYhzIxxaWfNxeotpW1TVNRfkf70mPBGd7moETagb0rVYbCkycznQaf9bVgXx2juI+AStM9ZA+w==;EndpointSuffix=core.windows.net");
+            // var serviceClient = new BlobServiceClient("endpoint url here");
             //  var containers = serviceClient.GetBlobContainers();
             //  foreach(var container in containers){
             //     log.LogInformation("Container: " + container.Name);
