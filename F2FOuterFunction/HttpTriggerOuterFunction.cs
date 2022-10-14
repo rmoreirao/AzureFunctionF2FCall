@@ -38,7 +38,7 @@ namespace TestOuter.Function
             sbLog.Append("outer;" + guid + ";"  + startTime.ToString("MM-dd-yyy HH:mm:ss.fff") + ";" + context.InvocationId + ";" + Activity.Current.RootId + ";");
 
        
-            HttpRequestMessage newRequest = new HttpRequestMessage(HttpMethod.Get, "https://func-test-asr-inner-dedicated.azurewebsites.net/api/HttpTriggerInnerFunction?guid=" + guid);
+            HttpRequestMessage newRequest = new HttpRequestMessage(HttpMethod.Get, "https://func-inner-dedicated-ne.azurewebsites.net/api/HttpTriggerInnerFunction?guid=" + guid);
 
             //Read Server Response
             HttpResponseMessage httpResponse = await _client.SendAsync(newRequest);

@@ -18,7 +18,7 @@ while(true){
         sb.Append(count + ";");
         sb.Append(guid + ";"  + startTime.ToString("MM-dd-yyy HH:mm:ss.fff") + ";");
         
-        HttpRequestMessage newRequest = new HttpRequestMessage(HttpMethod.Get, String.Format("https://func-test-asr-outer-dedicated.azurewebsites.net/api/HttpTriggerOuterFunction?guid={0}",guid));
+        HttpRequestMessage newRequest = new HttpRequestMessage(HttpMethod.Get, String.Format("https://func-outer-dedicated-we.azurewebsites.net/api/HttpTriggerOuterFunction?guid={0}",guid));
         //Read Server Response
         HttpResponseMessage httpResponse = await newClient.SendAsync(newRequest);
         

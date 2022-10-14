@@ -12,10 +12,17 @@ using System.Text;
 
 namespace TestInner.Function
 {
-    public static class HttpTriggerInnerFunction
+    public class HttpTriggerInnerFunction
     {
+        private readonly BlobServiceClient _blobServiceClient;
+
+        public HttpTriggerInnerFunction(BlobServiceClient blobServiceClient)
+        {
+            _blobServiceClient = blobServiceClient;
+        }
+
         [FunctionName("HttpTriggerInnerFunction")]
-        public static async Task<IActionResult> Run(
+        public async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
             ILogger log)
         {
@@ -26,11 +33,10 @@ namespace TestInner.Function
             
             sbLog.Append("inner;" + guid + ";"  + startTime.ToString("MM-dd-yyyTHH:mm:ss.fff") + ";");
 
-            // var serviceClient = new BlobServiceClient("endpoint url here");
-            //  var containers = serviceClient.GetBlobContainers();
-            //  foreach(var container in containers){
-            //     log.LogInformation("Container: " + container.Name);
-            //  }
+             var containers = _blobServiceClient.GetBlobContainers();
+             foreach(var container in containers){
+                log.LogInformation("Container: " + container.Name);
+             }
 
             var endTime = System.DateTime.Now;
             sbLog.Append(endTime.ToString("MM-dd-yyy HH:mm:ss.fff") + ";" + (endTime - startTime).Milliseconds + ";");
