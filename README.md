@@ -27,7 +27,14 @@ https://learn.microsoft.com/en-us/azure/azure-functions/functions-dotnet-depende
     1) Create a Windows VM
     2) Connect to the VM using Bastion
     3) Run the following code on Powershell to validate the solution
-    
-    ![Script to validate the function call](PowerShellScript.jpg)
-    
+
+```markdown
+    $x=0
+    while ($x -lt 30000)
+    {
+        "Call number $x"
+        Invoke-RestMethod <API Url>
+        $x++
+    }
+```
     
