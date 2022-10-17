@@ -17,19 +17,13 @@ namespace TestOuter.Function
 {
 
 
-    public class HttpTriggerOuterFunction
+    public class HttpTriggerOuterFunctionTest
     {
-        private readonly HttpClient _client;
-        private readonly string _innerApiUrl;
-        public HttpTriggerOuterFunction(IHttpClientFactory httpClientFactory)
+        public HttpTriggerOuterFunctionTest()
         {
-            this._client = httpClientFactory.CreateClient();
-            // Set this as a property of your function
-            // Sample: https://func-f2f-private-link-inner.azurewebsites.net/api/HttpTriggerInnerFunction
-            _innerApiUrl = Environment.GetEnvironmentVariable("INNER_API_URL");
         }
 
-        [FunctionName("HttpTriggerOuterFunction")]
+        [FunctionName("HttpTriggerOuterFunctionTest")]
         public async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
             ILogger log, ExecutionContext context)
@@ -42,21 +36,12 @@ namespace TestOuter.Function
             sbLog.Append("outer;" + guid + ";"  + startTime.ToString("MM-dd-yyy HH:mm:ss.fff") + ";" + context.InvocationId + ";" + Activity.Current.RootId + ";");
 
        
-            HttpRequestMessage newRequest = new HttpRequestMessage(HttpMethod.Get, _innerApiUrl + "?guid=" + guid);
-
-            //Read Server Response
-            HttpResponseMessage httpResponse = await _client.SendAsync(newRequest);
             var endTime = System.DateTime.Now;
             sbLog.Append(endTime.ToString("MM-dd-yyy HH:mm:ss.fff") + ";" + (endTime - startTime).TotalMilliseconds + ";");
-
-            httpResponse.EnsureSuccessStatusCode();
-            var responseBody = httpResponse.Content.ReadAsStringAsync().Result;
-            
-            
             
             log.LogInformation("Finish execution of Outer for guid " + guid ?? "??guid??");
 
-            return new OkObjectResult(sbLog.ToString() + responseBody);
+            return new OkObjectResult(sbLog.ToString());
         }
     }
 }

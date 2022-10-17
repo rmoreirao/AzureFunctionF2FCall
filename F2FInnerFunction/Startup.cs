@@ -4,6 +4,7 @@ using Microsoft.Extensions.Azure;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections;
+using Microsoft.Extensions.Logging;
 using Microsoft.Win32;
 
 [assembly: FunctionsStartup(typeof(TestInner.Function.Startup))]
@@ -14,20 +15,13 @@ namespace TestInner.Function
     {
         public override void Configure(IFunctionsHostBuilder builder)
         {
+
             builder.Services.AddHttpClient();
             builder.Services.AddAzureClients(clientBuilder =>
                 {
-                    
-                    // Add a storage account client
-                    clientBuilder.AddBlobServiceClient("put the connection string to blob here");
-                    // clientBuilder.AddBlobServiceClient(GetEnvironmentVariable("STORAGE_ACCOUNT"));
+                    // Add this property to the Function App with the Conn String of the Storage Account!
+                    clientBuilder.AddBlobServiceClient(Environment.GetEnvironmentVariable("STG_CONNSTRING"));
                 });
-        }
-
-        private static string GetEnvironmentVariable(string name)
-        {
-            return name + ": " +
-                System.Environment.GetEnvironmentVariable(name, EnvironmentVariableTarget.Process);
         }
     }
 }
