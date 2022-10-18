@@ -17,6 +17,7 @@
     1) Create Storage Account Standard, and retrieve Connection String
     2) Add Private Endpoint to PrivateEndPoint subnet
     3) Restrict Access to the FunctionsVNetIntegration subnet
+    4) Create a container - ex.: testcontainer
 ### Create Inner Function
     1) Create Function Inner: Code, ASPNET 6, Unix, Dedicated Plan, New Storate Account, App Insights
     2) Add the STG_CONNSTRING config variable with the Connection String of Storage Account
@@ -37,10 +38,10 @@
 
 ```markdown
     $x=0
-    while ($x -lt 30000)
+    while ($x -lt 100000)
     {
         "Call number $x"
-        Invoke-RestMethod https://func-f2f-plink-outer-fra.azurewebsites.net/api/HttpTriggerOuterFunction
+        Invoke-RestMethod <your url here> 
         $x++
     }
 ```
