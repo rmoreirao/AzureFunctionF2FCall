@@ -45,3 +45,24 @@
     }
 ```
     
+### Helpgful Kusto Queries to analyse the Duration of the Calls
+# Check the percentiles of API calls duration
+
+```markdown
+    // Operations performance 
+    // Calculate request count and duration by operations. 
+    // To create an alert for this query, click '+ New alert rule'
+    requests
+    | summarize RequestsCount=sum(itemCount), AverageDuration=avg(duration), percentiles(duration, 50, 95, 99, 99.5,99.9, 99.99) by operation_Name // you can replace 'operation_Name' with another value to segment by a different property
+    | order by RequestsCount desc // order from highest to lower (descending)
+```
+
+# Aggregate the duration by buckets
+
+```markdown
+    // Response time buckets 
+    // Show how many requests are in each performance-bucket. 
+    requests
+    | summarize requestCount=sum(itemCount), avgDuration=avg(duration) by performanceBucket
+    | order by avgDuration asc // sort by average request duration
+```
