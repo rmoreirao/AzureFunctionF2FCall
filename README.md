@@ -1,5 +1,12 @@
-### Sample code for calling one from another Azure Function using dependency injection
-https://learn.microsoft.com/en-us/azure/azure-functions/functions-dotnet-dependency-injection#use-injected-dependencies
+### Sample code for calling one from another Azure Function dependency injection
+## Reference Documentation
+   1) Dependency Injection: https://learn.microsoft.com/en-us/azure/azure-functions/functions-dotnet-dependency-injection#use-injected-dependencies
+   2) Azure Function with Private Endpoints and Virtual Network Integration: https://learn.microsoft.com/en-us/azure/azure-functions/functions-create-vnet
+   3) Reference Architecture: https://learn.microsoft.com/en-us/samples/azure-samples/http-trigger-azure-function-premium-plan/http-trigger-azure-function-premium-plan/
+   4) Tutorial: Connect to a web app using an Azure Private Endpoint: https://learn.microsoft.com/en-us/azure/private-link/tutorial-private-endpoint-webapp-portal?source=recommendations 
+
+### Steps to use it via Public Functions
+    Create 2 functions, deploy the Inner and Outer function, and execute the Console App 
 
 ### Steps to use it with Private Endpoints
 # VNet and Subnets
@@ -33,7 +40,7 @@ https://learn.microsoft.com/en-us/azure/azure-functions/functions-dotnet-depende
     while ($x -lt 30000)
     {
         "Call number $x"
-        Invoke-RestMethod <API Url>
+        Invoke-RestMethod https://func-f2f-plink-outer-fra.azurewebsites.net/api/HttpTriggerOuterFunction
         $x++
     }
 ```
